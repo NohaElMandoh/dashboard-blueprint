@@ -37,7 +37,12 @@
         </ul>
       </div>
     </li>
-
+    <li class="nav-item">
+      <a class="nav-link" href="{{route('clients.index')}}">
+        <span class="icon-bg"><i class=" mdi mdi-account menu-icon"></i></span>
+        <span class="menu-title">Clients</span>
+      </a>
+    </li>
 
     <li class="nav-item">
       <a class="nav-link" href="{{route('employees.index')}}">

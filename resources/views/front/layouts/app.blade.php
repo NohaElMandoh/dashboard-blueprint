@@ -22,10 +22,10 @@
         <!-- Spinner End -->
 
 
-      <!-- Navbar Start -->
-<div class="container-fluid nav-bar bg-transparent">
+        <!-- Navbar Start -->
+        <div class="container-fluid nav-bar bg-transparent">
 
-<!-- <div id="chat-widget" style="position: fixed; bottom: 10px; right: 10px; width: 300px; height: 400px; border: 1px solid #ccc; border-radius: 10px; background: #fff;">
+            <!-- <div id="chat-widget" style="position: fixed; bottom: 10px; right: 10px; width: 300px; height: 400px; border: 1px solid #ccc; border-radius: 10px; background: #fff;">
     <div id="chat-header" style="background: #007bff; color: white; padding: 10px;">Chatbot</div>
     <div id="chat-body" style="height: 80%; overflow-y: auto; padding: 10px;"></div>
     <div id="chat-footer" style="padding: 10px;">
@@ -33,101 +33,131 @@
         <button id="chat-send" style="width: 18%; padding: 5px; background: #007bff; color: white;">Send</button>
     </div>
 </div> -->
-<div id="chat-widget-container" style="position: fixed; bottom: 10px; right: 10px; z-index: 1000;">
-    <!-- Chat Icon -->
-    <div id="chat-icon" style="cursor: pointer; background: #00B98E; border-radius: 50%; width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; color: white; font-size: 24px;">
-        💬
-    </div>
+            <div id="chat-widget-container" style="position: fixed; bottom: 10px; right: 10px; z-index: 1000;">
+                <!-- Chat Icon -->
+                <div id="chat-icon" style="cursor: pointer; background: #00B98E; border-radius: 50%; width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; color: white; font-size: 24px;">
+                    💬
+                </div>
 
-    <!-- Chat Widget -->
-    <div id="chat-widget" style="display: none; width: 300px; height: 400px; border: 1px solid #ccc; border-radius: 10px; background: #fff; flex-direction: column; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
-        <div id="chat-header" style="background: #00B98E; color: white; padding: 10px; display: flex; justify-content: space-between; align-items: center;">
-            <span>Chatbot</span>
-            <span id="chat-close" style="cursor: pointer;">✖</span>
-        </div>
-        <div id="chat-body" style="flex-grow: 1; overflow-y: auto; padding: 10px;"></div>
-        <div id="chat-footer" style="padding: 10px; display: flex; gap: 10px;">
-            <input type="text" id="chat-input" style="flex-grow: 1; padding: 5px; border: 1px solid #ccc; border-radius: 5px;">
-            <button id="chat-send" style="padding: 5px 10px; background: #00B98E; color: white; border: none; border-radius: 5px;">Send</button>
-        </div>
-    </div>
-</div>
+                <!-- Chat Widget -->
+                <div id="chat-widget" style="display: none; width: 300px; height: 400px; border: 1px solid #ccc; border-radius: 10px; background: #fff; flex-direction: column; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+                    <div id="chat-header" style="background: #00B98E; color: white; padding: 10px; display: flex; justify-content: space-between; align-items: center;">
+                        <span>Chatbot</span>
+                        <span id="chat-close" style="cursor: pointer;">✖</span>
+                    </div>
+                    <div id="chat-body" style="flex-grow: 1; overflow-y: auto; padding: 10px;"></div>
+                    <div id="chat-footer" style="padding: 10px; display: flex; gap: 10px;">
+                        <input type="text" id="chat-input" style="flex-grow: 1; padding: 5px; border: 1px solid #ccc; border-radius: 5px;">
+                        <button id="chat-send" style="padding: 5px 10px; background: #00B98E; color: white; border: none; border-radius: 5px;">Send</button>
+                    </div>
+                </div>
+            </div>
 
-<script>
-       const chatIcon = document.getElementById('chat-icon');
-    const chatWidget = document.getElementById('chat-widget');
-    const chatClose = document.getElementById('chat-close');
+            <script>
+                const chatIcon = document.getElementById('chat-icon');
+                const chatWidget = document.getElementById('chat-widget');
+                const chatClose = document.getElementById('chat-close');
 
-    // Show the chat widget when the icon is clicked
-    chatIcon.addEventListener('click', () => {
-        chatWidget.style.display = 'flex'; // Show the widget
-        chatIcon.style.display = 'none'; // Hide the icon
-    });
-
-    // Hide the chat widget and show the icon when the close button is clicked
-    chatClose.addEventListener('click', () => {
-        chatWidget.style.display = 'none'; // Hide the widget
-        chatIcon.style.display = 'flex'; // Show the icon
-    });
-     const chatbotUrl = "{{ url('/chatbot') }}";
-    document.getElementById('chat-send').addEventListener('click', function () {
-        const input = document.getElementById('chat-input');
-        const message = input.value.trim();
-        if (message) {
-            fetch(chatbotUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
-                body: JSON.stringify({ message })
-            })
-                .then(response => response.json())
-                .then(data => {
-                    const chatBody = document.getElementById('chat-body');
-                    chatBody.innerHTML += `<div><b>You:</b> ${message}</div>`;
-                    chatBody.innerHTML += `<div><b>Bot:</b> ${data.reply}</div>`;
-                    input.value = '';
+                // Show the chat widget when the icon is clicked
+                chatIcon.addEventListener('click', () => {
+                    chatWidget.style.display = 'flex'; // Show the widget
+                    chatIcon.style.display = 'none'; // Hide the icon
                 });
-        }
-    });
-</script>
 
-    <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4" style="z-index: 1030;">
-        <a href="{{route('home')}}" class="navbar-brand d-flex align-items-center text-center">
-            <div class="icon p-2 me-2">
-                <img class="img-fluid" src="{{ url('front/img/icon-deal.png')}}" alt="Icon" style="width: 30px; height: 30px;">
-            </div>
-            <h1 class="m-0 text-primary">LOGO</h1>
-        </a>
-        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav ms-auto">
-                <a href="{{route('home')}}" class="nav-item nav-link active">Home</a>
-                <a href="{{route('about')}}" class="nav-item nav-link">About</a>
-                <a href="{{route('repositories')}}" class="nav-item nav-link">Repositories</a>
-                <a href="{{route('contact_us')}}" class="nav-item nav-link">Contact</a>
-            </div>
-            @guest('vendor')
-                <a href="{{ route('vendor.login') }}" class="btn btn-secondary px-3 d-none d-lg-flex"> Login as a Warehouse Owner</a>
-                <a href="{{ route('vendor.register') }}" class="btn btn-success px-3 d-none d-lg-flex">Sign up as a Warehouse Owner</a>
-            @else
-                <a href="{{ route('vendor.logout') }}" class="btn btn-danger px-3 d-none d-lg-flex"
-                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                   Logout
+                // Hide the chat widget and show the icon when the close button is clicked
+                chatClose.addEventListener('click', () => {
+                    chatWidget.style.display = 'none'; // Hide the widget
+                    chatIcon.style.display = 'flex'; // Show the icon
+                });
+                const chatbotUrl = "{{ url('/chatbot') }}";
+                document.getElementById('chat-send').addEventListener('click', function() {
+                    const input = document.getElementById('chat-input');
+                    const message = input.value.trim();
+                    if (message) {
+                        fetch(chatbotUrl, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                },
+                                body: JSON.stringify({
+                                    message
+                                })
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                const chatBody = document.getElementById('chat-body');
+                                chatBody.innerHTML += `<div><b>You:</b> ${message}</div>`;
+                                chatBody.innerHTML += `<div><b>Bot:</b> ${data.reply}</div>`;
+                                input.value = '';
+                            });
+                    }
+                });
+            </script>
+
+            <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4" style="z-index: 1030;">
+                <a href="{{route('home')}}" class="navbar-brand d-flex align-items-center text-center">
+                    <div class="icon p-2 me-2">
+                        <img class="img-fluid" src="{{ url('front/img/icon-deal.png')}}" alt="Icon" style="width: 30px; height: 30px;">
+                    </div>
+                    <h1 class="m-0 text-primary">LOGO</h1>
                 </a>
-                <a href="{{ route('vendor.upload_form') }}" class="btn btn-primary px-3 d-none d-lg-flex">Upload Repository</a>
-                <form id="logout-form" action="{{ route('vendor.logout') }}" method="POST" class="d-none">
-                    @csrf
-                </form>
-            @endguest
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto">
+                        <a href="{{route('home')}}" class="nav-item nav-link active">Home</a>
+                        <a href="{{route('about')}}" class="nav-item nav-link">About</a>
+                        <a href="{{route('repositories')}}" class="nav-item nav-link">Repositories</a>
+                        <a href="{{route('contact_us')}}" class="nav-item nav-link">Contact</a>
+
+
+                    </div>
+                    @if(auth('client')->guest() && auth('vendor')->guest())
+                    
+                    <!-- Client Login and Register Buttons -->
+                    <a href="{{ route('client.login') }}" class="btn btn-primary btn-sm mx-2 custom-auth-btn">
+                        Login
+                    </a>
+                    <a href="{{ route('client.register') }}" class="btn btn-success btn-sm mx-2 custom-auth-btn">
+                        Register
+                    </a>
+                  
+                    @else
+                    @auth('vendor')
+                    <span class="text-muted mx-2">Hi, {{ auth('vendor')->user()->name }} </span>
+
+                    <a href="{{ route('vendor.logout') }}" class="btn btn-danger btn-sm mx-2 custom-auth-btn" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        Logout 
+                    </a>
+                    <form id="logout-form" action="{{ route('vendor.logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                    @else
+                    @auth('client')
+                    <span class="text-muted mx-2">Hi, {{ auth('client')->user()->name }} </span>
+      
+                    <a href="{{ route('client.logout') }}" class="btn btn-danger btn-sm mx-2 custom-auth-btn" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        Logout 
+                    </a>
+                    <form id="logout-form" action="{{ route('client.logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                    @endauth
+                    @endauth
+                    <!-- Client Logout Button -->
+                   
+                    @endif
+                   
+                </div>
+            </nav>
         </div>
-    </nav>
-</div>
-<!-- Navbar End -->
+        <!-- Navbar End -->
 
 
 
-       @yield('content')
+        @yield('content')
         <!-- Footer Start -->
         <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container py-5">
@@ -189,10 +219,10 @@
                 <div class="copyright">
                     <div class="row">
                         <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                            &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved. 
-							
-							<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-							Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+                            &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved.
+
+                            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                            Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
                         </div>
                         <div class="col-md-6 text-center text-md-end">
                             <div class="footer-menu">
@@ -213,7 +243,7 @@
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
-@include('front.layouts.scripts')
+    @include('front.layouts.scripts')
 </body>
 
 </html>

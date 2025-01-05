@@ -44,11 +44,11 @@
                                     <a class="d-block h5 mb-2" href="{{ route('repository', ['id' => $repository->id]) }}">{{ Str::limit(json_decode($repository->name)->en ?? 'N/A', 50) }}</a>
                                     <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{json_decode($repository->location)->en ?? 'N/A' }}</p>
                                 </div>
-                                <!-- <div class="d-flex border-top">
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>{{ $repository->area }} Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>{{ $repository->bedrooms }} Bed</small>
-                                    <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>{{ $repository->bathrooms }} Bath</small>
-                                </div> -->
+                                <div class="d-flex border-top">
+    <a href="{{ route('order_details', ['id' => $repository->id]) }}" class="btn btn-primary flex-fill text-center py-2">
+        <i class="fa fa-shopping-cart me-2"></i>Buy Now
+    </a>
+</div>
                             </div>
                         </div>
                       
@@ -79,11 +79,11 @@
                                 <a class="d-block h5 mb-2" href="{{ route('repository', ['id' => $repository->id]) }}">{{ Str::limit(json_decode($repository->name)->en ?? 'N/A', 50) }}</a>
                                 <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{json_decode($repository->location)->en ?? 'N/A' }}</p>
                             </div>
-                            <!-- <div class="d-flex border-top">
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>{{ $repository->area }} Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>{{ $repository->bedrooms }} Bed</small>
-                                    <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>{{ $repository->bathrooms }} Bath</small>
-                                </div> -->
+                            <div class="d-flex border-top">
+    <a href="{{ route('order_details', ['id' => $repository->id]) }}" class="btn btn-primary flex-fill text-center py-2">
+        <i class="fa fa-shopping-cart me-2"></i>Buy Now
+    </a>
+</div>
                         </div>
                     </div>
                     {{-- @else
@@ -115,11 +115,11 @@
                                 <a class="d-block h5 mb-2" href="{{ route('repository', ['id' => $repository->id]) }}">{{ Str::limit(json_decode($repository->name)->en ?? 'N/A', 50) }}</a>
                                 <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{json_decode($repository->location)->en ?? 'N/A' }}</p>
                             </div>
-                            <!-- <div class="d-flex border-top">
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>{{ $repository->area }} Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>{{ $repository->bedrooms }} Bed</small>
-                                    <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>{{ $repository->bathrooms }} Bath</small>
-                                </div> -->
+                            <div class="d-flex border-top">
+    <a href="{{ route('order_details', ['id' => $repository->id]) }}" class="btn btn-primary flex-fill text-center py-2">
+        <i class="fa fa-shopping-cart me-2"></i>Buy Now
+    </a>
+</div>
                         </div>
                     </div>
                     {{-- @else

@@ -6,13 +6,70 @@
     <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
         <!-- Text Content -->
         <div class="col-md-6 p-5 mt-lg-5">
-            <h1 class="display-5 animated fadeIn mb-4">Explore Our <span class="text-primary">Repositories</span></h1>
-            <p class="animated fadeIn mb-4 pb-2">Discover a variety of projects and repositories that showcase our work and expertise. Dive into the code and see what we have to offer.</p>
-            <!-- Invite Us Button -->
-            <button type="button" class="btn btn-primary py-3 px-5 me-3 animated fadeIn" data-bs-toggle="modal" data-bs-target="#inviteUsModal">
-                Invite Us for Bidding
-            </button>
+    <h1 class="display-5 animated fadeIn mb-4">Explore Our <span class="text-primary">Repositories</span></h1>
+    <p class="animated fadeIn mb-4 pb-2">Discover a variety of projects and repositories that showcase our work and expertise. Dive into the code and see what we have to offer.</p>
+    @auth('client')
+    <!-- Display Message for Client Logged In -->
+    <div class="alert alert-warning mt-4" role="alert">
+        You are currently logged in as a client. Please log out first to register as a warehouse owner.
+        <br>
+        <a href="{{ route('client.logout') }}" class="btn btn-link text-danger"
+           onclick="event.preventDefault(); document.getElementById('logout-form-client').submit();">
+            Click here to log out as a client
+        </a>
+    </div>
+    <form id="logout-form-client" action="{{ route('client.logout') }}" method="POST" class="d-none">
+        @csrf
+    </form>
+
+    <!-- Disabled Sign Up Button -->
+    <div class="mt-3">
+        <button class="btn btn-success w-100 py-2" style="border-radius: 20px;" disabled>
+            Sign up as Warehouse Owner
+        </button>
+    </div>
+@elseauth('vendor')
+    <!-- Auth Buttons (Logout and Upload for Vendor) -->
+    <div class="mt-4 auth-buttons-container">
+        <div class="mb-3">
+            <a href="{{ route('vendor.logout') }}" class="btn btn-primary w-100 py-2"
+               onclick="event.preventDefault(); document.getElementById('logout-form-vendor').submit();">
+               Logout
+            </a>
         </div>
+        <div class="mb-3">
+            <a href="{{ route('vendor.upload_form') }}" class="btn btn-success w-100 py-2">Upload Repository</a>
+        </div>
+        <form id="logout-form-vendor" action="{{ route('vendor.logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
+    </div>
+@else
+    <!-- Auth Buttons (Login and Register for Vendor) -->
+    <div class="mt-4 auth-buttons-container">
+        <div class="mb-3">
+            <!-- Login Button -->
+            <a href="{{ route('vendor.login') }}" class="btn btn-primary w-100 py-2" style="border-radius: 20px;">
+                Login as Warehouse Owner
+            </a>
+        </div>
+        <div class="mb-3">
+            <!-- Register Button -->
+            <a href="{{ route('vendor.register') }}" class="btn btn-success w-100 py-2" style="border-radius: 20px;">
+                Sign up as Warehouse Owner
+            </a>
+        </div>
+    </div>
+@endauth
+
+    <!-- Invite Us Button -->
+    <div class="d-flex justify-content-center my-3">
+        <button type="button" class="btn btn-secondary py-3 px-5 animated fadeIn" data-bs-toggle="modal" data-bs-target="#inviteUsModal">
+            Invite Us for Bidding
+        </button>
+    </div>
+</div>
+
         <!-- Carousel Section -->
         <div class="col-md-6 animated fadeIn">
             <div class="owl-carousel header-carousel">
@@ -54,6 +111,7 @@
                 <a href="{{ route('contact_us') }}" class="btn btn-primary">Contact Us</a>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
+
         </div>
     </div>
 </div>
@@ -108,7 +166,7 @@
         <div class="row g-4 justify-content-center">
             @foreach($types as $type)
             <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="cat-item d-block bg-light text-center rounded p-3" >
+                <div class="cat-item d-block bg-light text-center rounded p-3">
                     <div class="rounded p-4">
                         <div class="icon mb-3">
                             @if(strtolower(json_decode($type->name)->en ?? '') == 'cold')
@@ -124,7 +182,7 @@
                         <h6>{{ json_decode($type->name)->en ?? 'N/A' }}</h6>
                         <span>{{ $type->repositories_count }} Repositories</span>
                     </div>
-</div>
+                </div>
             </div>
             @endforeach
         </div>
@@ -193,10 +251,15 @@
                                 <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{ json_decode($repository->type->name)->en ?? 'N/A' }} </div>
                             </div>
                             <div class="p-4 pb-0 flex-grow-1 d-flex flex-column">
-                                <h5 class="text-primary mb-3">${{ $repository->price }}</h5>
+                                <h5 class="text-primary mb-3">${{ $repository->price ?? 1000 }}</h5>
                                 <a class="d-block h5 mb-2" href="{{ route('repository', ['id' => $repository->id]) }}">{{ Str::limit(json_decode($repository->name)->en ?? 'N/A', 50) }}</a>
                                 <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{json_decode($repository->location)->en ?? 'N/A' }}</p>
                             </div>
+                            <div class="d-flex border-top">
+    <a href="{{ route('order_details', ['id' => $repository->id]) }}" class="btn btn-primary flex-fill text-center py-2">
+        <i class="fa fa-shopping-cart me-2"></i>Buy Now
+    </a>
+</div>
                         </div>
                     </div>
 
@@ -204,7 +267,7 @@
                     {{-- @else
                         <p style="text-align: center;">No Repository Avaliable</p>--}}
                     @endif
-                  
+
                     <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
                         <a class="btn btn-primary py-3 px-5" href="{{route('repositories')}}">Browse More Property</a>
                     </div>
@@ -222,13 +285,18 @@
                                 <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{ json_decode($repository->type->name)->en ?? 'N/A' }} </div>
                             </div>
                             <div class="p-4 pb-0 flex-grow-1 d-flex flex-column">
-                            <h5 class="text-primary mb-3">${{ $repository->price }}</h5>
+                                <h5 class="text-primary mb-3">${{ $repository->price ?? 1000 }}</h5>
                                 <a class="d-block h5 mb-2" href="{{ route('repository', ['id' => $repository->id]) }}">{{ Str::limit(json_decode($repository->name)->en ?? 'N/A', 50) }}</a>
                                 <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{json_decode($repository->location)->en ?? 'N/A' }}</p>
                             </div>
+                            <div class="d-flex border-top">
+    <a href="{{ route('order_details', ['id' => $repository->id]) }}" class="btn btn-primary flex-fill text-center py-2">
+        <i class="fa fa-shopping-cart me-2"></i>Buy Now
+    </a>
+</div>
                         </div>
                     </div>
-                   {{-- @else
+                    {{-- @else
                     <p style="text-align: center;">No Repository Avaliable</p>--}}
                     @endif
                     @endforeach
@@ -250,10 +318,15 @@
                                 <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{ json_decode($repository->type->name)->en ?? 'N/A' }} </div>
                             </div>
                             <div class="p-4 pb-0 flex-grow-1 d-flex flex-column">
-                            <h5 class="text-primary mb-3">${{ $repository->price }}</h5>
+                                <h5 class="text-primary mb-3">${{ $repository->price ??1000}}</h5>
                                 <a class="d-block h5 mb-2" href="{{ route('repository', ['id' => $repository->id]) }}">{{ Str::limit(json_decode($repository->name)->en ?? 'N/A', 50) }}</a>
                                 <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{json_decode($repository->location)->en ?? 'N/A' }}</p>
                             </div>
+                            <div class="d-flex border-top">
+    <a href="{{ route('order_details', ['id' => $repository->id]) }}" class="btn btn-primary flex-fill text-center py-2">
+        <i class="fa fa-shopping-cart me-2"></i>Buy Now
+    </a>
+</div>
                         </div>
                     </div>
 

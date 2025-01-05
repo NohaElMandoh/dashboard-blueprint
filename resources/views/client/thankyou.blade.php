@@ -7,44 +7,14 @@
         <div class="row g-0 gx-5 align-items-center">
             <div class="col-lg-6">
                 <div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
-                    <h1 class="mb-3">Payment Form</h1>
-                    <p>Please provide the required details to complete your payment securely.</p>
+                    <h1 class="mb-3">Thank You</h1>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-8 mx-auto">
                 <div class="bg-light rounded p-4 shadow">
-                    <form action="{{ route('payment.process') }}" method="POST" class="needs-validation" novalidate>
-                        @csrf
-                        <div class="mb-3">
-                            <label for="cardName" class="form-label">Cardholder Name</label>
-                            <input type="text" class="form-control" id="cardName" name="cardName" placeholder="Enter cardholder's name" required>
-                            <div class="invalid-feedback">Please enter the cardholder's name.</div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="cardNumber" class="form-label">Card Number</label>
-                            <input type="text" class="form-control" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" required>
-                            <div class="invalid-feedback">Please enter a valid card number.</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="expiryDate" class="form-label">Expiry Date</label>
-                                <input type="text" class="form-control" id="expiryDate" name="expiryDate" placeholder="MM/YY" required>
-                                <div class="invalid-feedback">Please enter the expiry date.</div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="cvv" class="form-label">CVV</label>
-                                <input type="text" class="form-control" id="cvv" name="cvv" placeholder="123" required>
-                                <div class="invalid-feedback">Please enter the CVV code.</div>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="amount" class="form-label">Amount</label>
-                            <input type="text" class="form-control" id="amount" name="amount" value="$99.99" readonly>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-lg w-100">Pay Now</button>
-                    </form>
+                 <p>Thank you for your payment. Your order has been successfully placed.</p>
                 </div>
             </div>
         </div>

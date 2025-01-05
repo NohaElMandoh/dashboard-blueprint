@@ -67,12 +67,14 @@ Route::prefix('client')->group(function () {
         Route::post('/logout', [ClientController::class, 'logout'])->name('client.logout');
         Route::get('/buy-now', [ClientController::class, 'buy_now'])->name('buy-now');
         Route::get('/order_details/{id}', [ClientController::class, 'order_details'])->name('order_details');
+   
+    Route::post('/payment-process', [ClientController::class, 'payment_process'])->name('payment.process'); // Payment process route
     });
 
 
-    Route::get('/payment-form', function () {
-        return view('payment-form'); // Payment form view
-    })->middleware('auth');
+    // Route::get('/payment-form', function () {
+    //     return view('payment-form'); // Payment form view
+    // })->middleware('auth');
 });
 
 
@@ -86,6 +88,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/dashboard', [AdminAuthController::class, 'dashboard'])->name('admin.dashboard');
         Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
         Route::resource('employees', EmployeeController::class);
+        Route::resource('clients', ClientController::class);
+
         Route::resource('cities', CityController::class);
         Route::resource('types', TypeController::class);
         Route::resource('repositories', RepositoryController::class);

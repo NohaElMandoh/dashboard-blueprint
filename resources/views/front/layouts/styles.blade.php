@@ -57,5 +57,40 @@
         transform: scale(1);
     }
 }
+.btn {
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+    border-radius: 20px; /* Rounded edges */
+}
 
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+    .auth-buttons-container {
+        margin-left: 0 !important; /* Remove margin on smaller screens */
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 1rem; /* Space between buttons */
+    }
+
+    .auth-buttons-container .btn {
+        width: 100%; /* Full-width buttons on smaller screens */
+    }
+}
+/* Additional styling for custom button-like links */
+.custom-auth-btn {
+    text-decoration: none; /* Remove underline */
+    padding: 0.4rem 1rem; /* Adjust padding for button size */
+    font-size: 0.875rem; /* Slightly smaller text for a sleek look */
+    border-radius: 20px; /* Rounded edges for button-like appearance */
+    transition: all 0.3s ease; /* Smooth hover effects */
+}
+
+.custom-auth-btn:hover {
+    opacity: 0.9; /* Subtle hover effect */
+    text-decoration: none; /* Keep underline removed on hover */
+}
 </style>

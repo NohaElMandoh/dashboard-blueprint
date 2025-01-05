@@ -7,13 +7,14 @@
         <div class="row g-5 align-items-center">
             <!-- Repository Image -->
             <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
-                <img class="img-fluid rounded w-100" src="{{ url($repository->main_photo) }}" alt="Repository Image">
+                <div class="about-img position-relative overflow-hidden p-5 pe-0">
+                    <img class="img-fluid w-100" src="{{ url($repository->main_photo)}}">
+                </div>
             </div>
-
             <!-- Repository Information -->
             <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                 <div class="card border-0 shadow p-4">
-                    <h1 class="card-title text-primary mb-3">{{ json_decode($repository->name)->en ?? 'Repository Name' }}</h1>
+                    <h1 class="card-title text-primary mb-3">{{ Str::limit(json_decode($repository->name, true)['en'] ?? 'Repository Name' , 100)  }}</h1>
                     <p class="mb-4">{{ json_decode($repository->description)->en ?? 'Repository description goes here...' }}</p>
 
                     <div class="mb-3">
@@ -41,26 +42,7 @@
             </div>
         </div>
 
-        <!-- Additional Details Section -->
-        <div class="row g-5 mt-5">
-            <div class="col-lg-12">
-                <div class="card border-0 shadow p-4">
-                    <h2 class="text-primary">Additional Information</h2>
-                    <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit diam justo sed rebum.</p>
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <i class="fa fa-check text-primary me-2"></i> Feature 1
-                        </li>
-                        <li class="list-group-item">
-                            <i class="fa fa-check text-primary me-2"></i> Feature 2
-                        </li>
-                        <li class="list-group-item">
-                            <i class="fa fa-check text-primary me-2"></i> Feature 3
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+   
     </div>
 </div>
 <!-- Repository Details End -->
