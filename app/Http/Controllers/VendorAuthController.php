@@ -78,6 +78,7 @@ class VendorAuthController extends Controller
             'location_ar' => 'required',
             'map' => 'required|string',
             'area' => 'required|string',
+            'price' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -104,8 +105,9 @@ class VendorAuthController extends Controller
             'status' => $request->status,
             'map' => $request->map,
             'main_photo' => 'Repository/main_photo/' . $request->file('main_photo')->getClientOriginalName(),
-            'user_id' => auth()->id(),
+            'vendor_id' => auth()->id(),
             'area' => $request->area,
+            'price' => $request->price,
         ]);
         if ($request->hasFile('additional_photos')) {
             foreach ($request->file('additional_photos') as $photo) {

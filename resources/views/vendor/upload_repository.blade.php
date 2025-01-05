@@ -14,7 +14,7 @@
             <div class="col-md-12">
                 <div class="wow fadeInUp" data-wow-delay="0.5s">
                     <p>Please fill out the form below to upload your repository details. Ensure all required fields are completed accurately.</p>
-                 
+
                     <form action="{{ route('vendor.upload_repository') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
@@ -22,7 +22,7 @@
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             <ul>
                                 @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
+                                <li>{{ $error }}</li>
                                 @endforeach
                             </ul>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -113,7 +113,24 @@
                                     @enderror
                                 </div>
                             </div>
-
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <!-- Price Input -->
+                                    <input type="number"
+                                        step="0.01"
+                                        min="0"
+                                        class="form-control @error('price') is-invalid @enderror"
+                                        id="price"
+                                        name="price"
+                                        placeholder="Price"
+                                        value="{{ old('price') }}"
+                                        required>
+                                    <label for="price">Price ( $ )</label>
+                                    @error('price')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
                                     <select class="form-control @error('status') is-invalid @enderror" id="status" name="status" required style="background-color: white;">

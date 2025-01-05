@@ -20,6 +20,8 @@ class Repository extends Model
         'map',
         'main_photo',
         'user_id',
+        'vendor_id',
+        'price',
         'area'
     ];
     public function additional_photos_urls()
@@ -29,6 +31,9 @@ class Repository extends Model
     public function type()
     {
         return $this->belongsTo(Type::class);
+    }
+    public function vendor(){
+        return $this->belongsTo(Vendor::class);
     }
     public function attachments()
     {

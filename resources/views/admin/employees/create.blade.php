@@ -36,10 +36,21 @@
                             <label for="email">Email</label>
                             <input type="email" class="form-control" name="email" id="email" placeholder="Email">
                         </div>
+                       
                         <div class="form-group">
-                            <label for="position">Position</label>
-                            <input type="text" class="form-control" name="position" id="position" placeholder="Position">
+                        <label for="position">Position</label>
+                            <select class="form-control @error('position') is-invalid @enderror" id="position" name="position" required style="background-color: white;">
+                                <option value="" disabled selected>Select position</option>
+                                <option value="rent" {{ old('position') == 'Admin' ? 'selected' : '' }}>Admin</option>
+                                <option value="sale" {{ old('position') == 'Sub_Admin' ? 'selected' : '' }}>Sub Admin</option>
+                            </select>
+                           
+                            @error('position')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
+
+
                         <div class="form-group">
                             <label for="photo">Photo</label>
                             <input type="file" class="form-control" name="photo" id="photo">

@@ -28,19 +28,20 @@
                 <div class="tab-content">
                     <div id="tab-1" class="tab-pane fade show p-0 active">
                         <div class="row g-4">
-                    
+                        @if($repositories)
                     @foreach($repositories as $repository)
-                    @if($repository)
+                   
                         <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                             <div class="property-item rounded overflow-hidden h-100 d-flex flex-column">
                                 <div class="position-relative overflow-hidden">
-                                    <a href=""><img class="img-fluid" src="{{ $repository->main_photo }}" height="300px" alt=""></a>
+                                    <a href="{{ route('repository', ['id' => $repository->id]) }}"><img class="img-fluid custom-photo-size" src="{{ $repository->main_photo }}" height="300px" alt=""></a>
                                     <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">{{ $repository->status }}</div>
                                     <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{ json_decode($repository->type->name)->en ?? 'N/A' }} </div>
                                 </div>
                                 <div class="p-4 pb-0 flex-grow-1 d-flex flex-column">
-                                    <!-- <h5 class="text-primary mb-3">${{ $repository->price }}</h5> -->
-                                    <a class="d-block h5 mb-2" href="">{{ Str::limit(json_decode($repository->name)->en ?? 'N/A', 50) }}</a>
+                                <h5 class="text-primary mb-3">$ {{ $repository->price ?? '1000' }}</h5>
+                                    <h5 class="text-primary mb-3">BY : {{ $repository->vendor->name ?? '' }}</h5>
+                                    <a class="d-block h5 mb-2" href="{{ route('repository', ['id' => $repository->id]) }}">{{ Str::limit(json_decode($repository->name)->en ?? 'N/A', 50) }}</a>
                                     <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{json_decode($repository->location)->en ?? 'N/A' }}</p>
                                 </div>
                                 <!-- <div class="d-flex border-top">
@@ -50,11 +51,11 @@
                                 </div> -->
                             </div>
                         </div>
-                        @else
-                        <p style="text-align: center;">No Repository Avaliable</p>
-                        @endif
+                      
                     @endforeach
-                       
+                    {{-- @else
+                        <p style="text-align: center;">No Repository Avaliable</p>--}}
+                        @endif
                             <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
                                 <a class="btn btn-primary py-3 px-5" href="">Browse More Property</a>
                             </div>
@@ -68,13 +69,14 @@
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="property-item rounded overflow-hidden h-100 d-flex flex-column">
                             <div class="position-relative overflow-hidden">
-                                <a href=""><img class="img-fluid" src="{{ $repository->main_photo }}" height="300px" alt=""></a>
+                                <a href="{{ route('repository', ['id' => $repository->id]) }}"><img class="img-fluid custom-photo-size" src="{{ $repository->main_photo }}" height="300px" alt=""></a>
                                 <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">{{ $repository->status }}</div>
                                 <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{ json_decode($repository->type->name)->en ?? 'N/A' }} </div>
                             </div>
                             <div class="p-4 pb-0 flex-grow-1 d-flex flex-column">
-                                <!-- <h5 class="text-primary mb-3">${{ $repository->price }}</h5> -->
-                                <a class="d-block h5 mb-2" href="">{{ Str::limit(json_decode($repository->name)->en ?? 'N/A', 50) }}</a>
+                            <h5 class="text-primary mb-3">$ {{ $repository->price ?? '1000' }}</h5>
+                                <h5 class="text-primary mb-3">BY : {{ $repository->vendor->name ?? '' }}</h5>
+                                <a class="d-block h5 mb-2" href="{{ route('repository', ['id' => $repository->id]) }}">{{ Str::limit(json_decode($repository->name)->en ?? 'N/A', 50) }}</a>
                                 <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{json_decode($repository->location)->en ?? 'N/A' }}</p>
                             </div>
                             <!-- <div class="d-flex border-top">
@@ -84,8 +86,8 @@
                                 </div> -->
                         </div>
                     </div>
-                    @else
-                    <p style="text-align: center;">No Repository Avaliable</p>
+                    {{-- @else
+                        <p style="text-align: center;">No Repository Avaliable</p>--}}
                     @endif
                     @endforeach
 
@@ -103,13 +105,14 @@
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="property-item rounded overflow-hidden h-100 d-flex flex-column">
                             <div class="position-relative overflow-hidden">
-                                <a href=""><img class="img-fluid" src="{{ $repository->main_photo }}" height="300px" alt=""></a>
+                                <a href="{{ route('repository', ['id' => $repository->id]) }}"><img class="img-fluid custom-photo-size" src="{{ $repository->main_photo }}" height="300px" alt=""></a>
                                 <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">{{ $repository->status }}</div>
                                 <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{{ json_decode($repository->type->name)->en ?? 'N/A' }} </div>
                             </div>
                             <div class="p-4 pb-0 flex-grow-1 d-flex flex-column">
-                                <!-- <h5 class="text-primary mb-3">${{ $repository->price }}</h5> -->
-                                <a class="d-block h5 mb-2" href="">{{ Str::limit(json_decode($repository->name)->en ?? 'N/A', 50) }}</a>
+                            <h5 class="text-primary mb-3">$ {{ $repository->price ?? '1000' }}</h5>
+                                <h5 class="text-primary mb-3">BY : {{ $repository->vendor->name ?? '' }}</h5>
+                                <a class="d-block h5 mb-2" href="{{ route('repository', ['id' => $repository->id]) }}">{{ Str::limit(json_decode($repository->name)->en ?? 'N/A', 50) }}</a>
                                 <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{json_decode($repository->location)->en ?? 'N/A' }}</p>
                             </div>
                             <!-- <div class="d-flex border-top">
@@ -119,8 +122,8 @@
                                 </div> -->
                         </div>
                     </div>
-                    @else
-                    <p style="text-align: center;">No Repository Avaliable</p>
+                    {{-- @else
+                        <p style="text-align: center;">No Repository Avaliable</p>--}}
 
                     @endif
                     @endforeach

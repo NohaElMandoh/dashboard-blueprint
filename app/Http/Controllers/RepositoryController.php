@@ -11,12 +11,12 @@ class RepositoryController extends Controller
 {
     public function index()
     {
-        $repositories = Repository::where('verified',true)->paginate(5);
+        $repositories = Repository::where('verified',true)->paginate(10);
         return view('admin.repositories.index', compact('repositories'));
     }
     public function not_verified()
     {
-        $repositories = Repository::where('verified',false)->paginate(5);
+        $repositories = Repository::where('verified',false)->paginate(10);
         return view('admin.repositories.not_verified', compact('repositories'));
     }
     

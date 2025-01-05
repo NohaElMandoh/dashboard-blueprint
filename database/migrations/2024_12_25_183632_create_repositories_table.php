@@ -22,7 +22,12 @@ return new class extends Migration
             $table->json('location');
             $table->string('map');
             $table->string('main_photo')->nullable();
-            $table->unsignedBigInteger('user_id');
+            $table->decimal('price',5)->nullable();
+
+            $table->unsignedBigInteger('user_id')->nullable();
+
+            $table->unsignedBigInteger('vendor_id');
+
             $table->string('area');
             $table->timestamps();
         });

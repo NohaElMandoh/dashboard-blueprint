@@ -8,11 +8,14 @@
         <div class="row g-5 align-items-start mt-5">
             <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                 <div class="about-img position-relative overflow-hidden p-5 pe-0">
-                    <img class="img-fluid w-100" src="{{ url($repository->main_photo) }}">
+                    <img class="img-fluid w-100 custom-photo-size" src="{{ url($repository->main_photo) }}">
                 </div>
             </div>
             <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                <h1 class="mb-4">{{ json_decode($repository->name)->en ?? 'N/A' }}</h1>
+
+                <h1 class="mb-4">$ {{ $repository->price ?? '1000' }}</h1>
+
+                <h1 class="mb-4">{{ Str::limit(json_decode($repository->name, true)['en'], 100) }}</h1>
                 <p class="mb-4">{{ json_decode($repository->description)->en ?? 'N/A' }}</p>
                 <p><i class="fa fa-check text-primary me-3"></i>{{ json_decode($repository->type->name)->en ?? 'N/A' }}</p>
                 <p><i class="fa fa-check text-primary me-3"></i>{{ $repository->status ?? 'N/A' }}</p>
@@ -32,26 +35,26 @@
                     <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit diam justo sed rebum.</p>
                 </div>
             </div>
-            
+
         </div>
 
         <div class="tab-content">
-        <div id="tab-1" class="tab-pane fade show p-0 active">
-                        <div class="row g-4">
-                        @foreach($repository->additional_photos_urls as $key=>$photo)
-                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.{{$key+1}}s">
-                                <div class="property-item rounded overflow-hidden">
-                                    <div class="position-relative overflow-hidden">
-                                        <a href=""><img class="img-fluid  custom-photo-size" src="{{ url($photo->path) }}" alt=""></a>
-                                       </div>
-                                   
-                                  
-                                </div>
+            <div id="tab-1" class="tab-pane fade show p-0 active">
+                <div class="row g-4">
+                    @foreach($repository->additional_photos_urls as $key=>$photo)
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.{{$key+1}}s">
+                        <div class="property-item rounded overflow-hidden">
+                            <div class="position-relative overflow-hidden">
+                                <a href=""><img class="img-fluid  custom-photo-size" src="{{ url($photo->path) }}" alt=""></a>
                             </div>
-                         @endforeach
+
+
                         </div>
                     </div>
-      
+                    @endforeach
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

@@ -14,6 +14,10 @@
 <!-- Libraries Stylesheet -->
 <link href="{{ url('front/lib/animate/animate.min.css')}}" rel="stylesheet">
 <link href="{{ url('front/lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- Customized Bootstrap Stylesheet -->
 <link href="{{ url('front/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -33,5 +37,25 @@
     .modal {
         z-index: 20000; /* Ensure modal is above the navbar */
     }
-  
+    #chat-widget-container {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+}
+
+#chat-widget {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 </style>

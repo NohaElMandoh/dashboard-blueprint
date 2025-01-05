@@ -7,7 +7,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @include('front.layouts.styles')
 </head>
 
@@ -24,6 +24,72 @@
 
       <!-- Navbar Start -->
 <div class="container-fluid nav-bar bg-transparent">
+
+<!-- <div id="chat-widget" style="position: fixed; bottom: 10px; right: 10px; width: 300px; height: 400px; border: 1px solid #ccc; border-radius: 10px; background: #fff;">
+    <div id="chat-header" style="background: #007bff; color: white; padding: 10px;">Chatbot</div>
+    <div id="chat-body" style="height: 80%; overflow-y: auto; padding: 10px;"></div>
+    <div id="chat-footer" style="padding: 10px;">
+        <input type="text" id="chat-input" style="width: 80%; padding: 5px;">
+        <button id="chat-send" style="width: 18%; padding: 5px; background: #007bff; color: white;">Send</button>
+    </div>
+</div> -->
+<div id="chat-widget-container" style="position: fixed; bottom: 10px; right: 10px; z-index: 1000;">
+    <!-- Chat Icon -->
+    <div id="chat-icon" style="cursor: pointer; background: #00B98E; border-radius: 50%; width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; color: white; font-size: 24px;">
+        💬
+    </div>
+
+    <!-- Chat Widget -->
+    <div id="chat-widget" style="display: none; width: 300px; height: 400px; border: 1px solid #ccc; border-radius: 10px; background: #fff; flex-direction: column; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+        <div id="chat-header" style="background: #00B98E; color: white; padding: 10px; display: flex; justify-content: space-between; align-items: center;">
+            <span>Chatbot</span>
+            <span id="chat-close" style="cursor: pointer;">✖</span>
+        </div>
+        <div id="chat-body" style="flex-grow: 1; overflow-y: auto; padding: 10px;"></div>
+        <div id="chat-footer" style="padding: 10px; display: flex; gap: 10px;">
+            <input type="text" id="chat-input" style="flex-grow: 1; padding: 5px; border: 1px solid #ccc; border-radius: 5px;">
+            <button id="chat-send" style="padding: 5px 10px; background: #00B98E; color: white; border: none; border-radius: 5px;">Send</button>
+        </div>
+    </div>
+</div>
+
+<script>
+       const chatIcon = document.getElementById('chat-icon');
+    const chatWidget = document.getElementById('chat-widget');
+    const chatClose = document.getElementById('chat-close');
+
+    // Show the chat widget when the icon is clicked
+    chatIcon.addEventListener('click', () => {
+        chatWidget.style.display = 'flex'; // Show the widget
+        chatIcon.style.display = 'none'; // Hide the icon
+    });
+
+    // Hide the chat widget and show the icon when the close button is clicked
+    chatClose.addEventListener('click', () => {
+        chatWidget.style.display = 'none'; // Hide the widget
+        chatIcon.style.display = 'flex'; // Show the icon
+    });
+     const chatbotUrl = "{{ url('/chatbot') }}";
+    document.getElementById('chat-send').addEventListener('click', function () {
+        const input = document.getElementById('chat-input');
+        const message = input.value.trim();
+        if (message) {
+            fetch(chatbotUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                body: JSON.stringify({ message })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const chatBody = document.getElementById('chat-body');
+                    chatBody.innerHTML += `<div><b>You:</b> ${message}</div>`;
+                    chatBody.innerHTML += `<div><b>Bot:</b> ${data.reply}</div>`;
+                    input.value = '';
+                });
+        }
+    });
+</script>
+
     <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4" style="z-index: 1030;">
         <a href="{{route('home')}}" class="navbar-brand d-flex align-items-center text-center">
             <div class="icon p-2 me-2">
@@ -42,8 +108,8 @@
                 <a href="{{route('contact_us')}}" class="nav-item nav-link">Contact</a>
             </div>
             @guest('vendor')
-                <a href="{{ route('vendor.login') }}" class="btn btn-secondary px-3 d-none d-lg-flex">Vendor Login</a>
-                <a href="{{ route('vendor.register') }}" class="btn btn-success px-3 d-none d-lg-flex">Vendor Register</a>
+                <a href="{{ route('vendor.login') }}" class="btn btn-secondary px-3 d-none d-lg-flex"> Login as a Warehouse Owner</a>
+                <a href="{{ route('vendor.register') }}" class="btn btn-success px-3 d-none d-lg-flex">Sign up as a Warehouse Owner</a>
             @else
                 <a href="{{ route('vendor.logout') }}" class="btn btn-danger px-3 d-none d-lg-flex"
                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

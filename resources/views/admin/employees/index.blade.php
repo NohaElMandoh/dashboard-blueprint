@@ -40,9 +40,9 @@
                                 <th> Name </th>
                                 <th> Email </th>
                                 <th> Position </th>
-                                <th> Role </th>
-                                <!-- <th> Permissions </th>
-                                <th> Actions </th> -->
+                                  <!--  <th> Role </th>
+                             <th> Permissions </th> -->
+                                <th> Actions </th>
                             </tr>
                         </thead>
                         <tbody>

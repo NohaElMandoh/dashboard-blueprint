@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -9,7 +10,7 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        $employees = Employee::paginate(5);
+        $employees = Admin::paginate(10);
         return view('admin.employees.index', compact('employees'));
     }
 
@@ -22,7 +23,7 @@ class EmployeeController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:employees',
+            'email' => 'required|email|unique:admins',
             'position' => 'required',
             'photo' => 'required',
             'password' => 'required|min:6',
@@ -30,7 +31,7 @@ class EmployeeController extends Controller
 
         $photoPath = $request->file('photo')->move(public_path('photos'), $request->file('photo')->getClientOriginalName());
 
-        Employee::create([
+        Admin::create([
             'name' => $request->name,
             'email' => $request->email,
             'position' => $request->position,
@@ -41,18 +42,18 @@ class EmployeeController extends Controller
         return redirect()->route('employees.index')->with('success', 'Employee created successfully.');
     }
 
-    public function edit(Employee $employee)
+    public function edit(Admin $employee)
     {
         return view('admin.employees.edit', compact('employee'));
     }
 
-    public function update(Request $request, Employee $employee)
+    public function update(Request $request, Admin $employee)
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:employees,email,' . $employee->id,
+            'email' => 'required|email|unique:admins,email,' . $employee->id,
             'position' => 'required',
-            'photo' => 'required',
+            // 'photo' => 'required',
             'password' => 'nullable|min:6',
         ]);
 
@@ -74,7 +75,7 @@ class EmployeeController extends Controller
         return redirect()->route('employees.index')->with('success', 'Employee updated successfully.');
     }
 
-    public function destroy(Employee $employee)
+    public function destroy(Admin $employee)
     {
         $employee->delete();
         return response()->json(['success' => 'Employee deleted successfully.']);

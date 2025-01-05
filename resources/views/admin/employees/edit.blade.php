@@ -38,8 +38,16 @@
                             <input type="email" class="form-control" name="email" id="email" value="{{ $employee->email }}" placeholder="Email">
                         </div>
                         <div class="form-group">
-                            <label for="position">Position</label>
-                            <input type="text" class="form-control" name="position" id="position" value="{{ $employee->position }}" placeholder="Position">
+                        <label for="position">Position</label>
+                            <select class="form-control @error('position') is-invalid @enderror" id="position" name="position" required style="background-color: white;">
+                                <option value="" disabled selected>Select position</option>
+                                <option value="admin" {{ $employee->position == 'admin' ? 'selected' : '' }}>Admin</option>
+                                <option value="sub_admin" {{ $employee->position == 'sub_admin' ? 'selected' : '' }}>Sub Admin</option>
+                            </select>
+                           
+                            @error('position')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="photo">Photo</label>
