@@ -1,6 +1,6 @@
 <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-          <a class="navbar-brand brand-logo" href="index.html"><img src="{{ url('dashboard/assets/images/logo.svg')}}" alt="logo" /></a>
+          <a class="navbar-brand brand-logo" href="index.html" style="color:beige">Dashboard</a>
           <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{{ url('dashboard/assets/images/logo-mini.svg')}}" alt="logo" /></a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-stretch">
@@ -17,7 +17,7 @@
                   <img src="{{ url('dashboard/assets/images/faces/face28.png')}}" alt="image">
                 </div>
                 <div class="nav-profile-text">
-                  <p class="mb-1 text-black">{{Auth::user()->name}}</p>
+                  <p class="mb-1 text-black">{{--Auth::user()->name--}}</p>
                 </div>
               </a>
               <div class="dropdown-menu navbar-dropdown dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="profileDropdown" data-x-placement="bottom-end">
@@ -28,7 +28,7 @@
                   <h5 class="dropdown-header text-uppercase pl-2 text-dark">User Options</h5>
                  
                  
-                  <form action="{{ route('admin.logout') }}" method="POST" style="display: inline;">
+                  <form action="" method="POST" style="display: inline;">
     @csrf
     <button type="submit"class="dropdown-item py-1 d-flex align-items-center justify-content-between"> <span>Log Out</span>
     <i class="mdi mdi-logout ml-1"></i></button>

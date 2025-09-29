@@ -8,17 +8,12 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{{route('cities.index')}}">
+      <a class="nav-link" href="">
         <span class="icon-bg"><i class="mdi mdi-city menu-icon"></i></span>
         <span class="menu-title">Cities</span>
       </a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{{route('types.index')}}">
-        <span class="icon-bg"><i class="mdi mdi-shape menu-icon"></i></span>
-        <span class="menu-title">Types</span>
-      </a>
-    </li>
+   
 
 
     <li class="nav-item">
@@ -30,28 +25,18 @@
       <div class="collapse" id="auth">
         <ul class="nav flex-column sub-menu">
         
-        <li class="nav-item"> <a class="nav-link" href="{{route('repositories.index')}}"> Repositories </a></li>
+        <li class="nav-item"> <a class="nav-link" href=""> Repositories </a></li>
 
-          <li class="nav-item"> <a class="nav-link" href="{{route('admin.not_verified')}}"> Pending </a></li>
+          <li class="nav-item"> <a class="nav-link" href=""> Pending </a></li>
 
         </ul>
       </div>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{{route('clients.index')}}">
-        <span class="icon-bg"><i class=" mdi mdi-account menu-icon"></i></span>
-        <span class="menu-title">Clients</span>
-      </a>
-    </li>
+   
 
+   
     <li class="nav-item">
-      <a class="nav-link" href="{{route('employees.index')}}">
-        <span class="icon-bg"><i class=" mdi mdi-account menu-icon"></i></span>
-        <span class="menu-title">Employees</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{{route('admin.contacts.index')}}">
+      <a class="nav-link" href="">
         <span class="icon-bg"><i class=" mdi mdi-account menu-icon"></i></span>
         <span class="menu-title">Contacts</span>
       </a>
@@ -65,7 +50,7 @@
                 <img src="{{ url('dashboard/assets/images/faces/face28.png')}}" alt="image">
               </div>
               <div class="sidebar-profile-text">
-                <p class="mb-1">{{Auth::user()->name}}</p>
+                <p class="mb-1">{{--Auth::user()->name--}}</p>
               </div>
             </div>
           </div>
@@ -78,7 +63,7 @@
         <!-- <a href="#" class="nav-link"><i class="mdi mdi-logout menu-icon"></i>
                     <span class="menu-title">Log Out</span></a> -->
 
-        <form action="{{ route('admin.logout') }}" method="POST" style="display: inline;">
+        <form action="" method="POST" style="display: inline;">
           @csrf
           <button type="submit" class="nav-link" style="background: none; border: none; padding: 0;">
             <i class="mdi mdi-logout menu-icon"></i>

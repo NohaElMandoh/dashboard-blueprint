@@ -105,6 +105,12 @@
                 <p>
                     Whether you're looking for consultation, development, or partnership opportunities, we are here to help you succeed.
                 </p>
+                <p><strong>Contact Information:</strong></p>
+                <ul class="list-unstyled">
+                    <li><strong>Email:</strong> <a href="mailto:info@company.com">info@company.com</a></li>
+                    <li><strong>Phone:</strong> <a href="tel:+1234567890">+1 234-567-890</a></li>
+                    <li><strong>Address:</strong> 123 Business Avenue, Suite 456, City, Country</li>
+                </ul>
             </div>
             <!-- Modal Footer -->
             <div class="modal-footer">
