@@ -31,7 +31,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
     Route::post('/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
     Route::get('/dashboard', [AdminAuthController::class, 'dashboard'])->name('admin.dashboard');
-
+    Route::resource('cities', CityController::class);
+    Route::resource('types', TypeController::class);
     // Admin Dashboard Routes
     Route::middleware('auth:admin')->group(function () {
           });
